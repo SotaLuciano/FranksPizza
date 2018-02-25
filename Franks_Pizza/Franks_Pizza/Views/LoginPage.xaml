@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Franks_Pizza.LoginPage"
+             BackgroundImage="back.jpg">
+    <StackLayout VerticalOptions="Center" Padding="50">
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Login: " TextColor="Black" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" />
+            <Entry TextColor="Black" Text="{Binding Login}" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" >
+            <Label Text="Password: " TextColor="Black" FontAttributes="Bold" FontSize="22" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Entry IsPassword="True" TextColor="Black" Text="{Binding Pass}" HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="End">
+            <Button Text="SIGN IN" TextColor="White" BackgroundColor="Black" HorizontalOptions="FillAndExpand" Command="{Binding SignIn}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

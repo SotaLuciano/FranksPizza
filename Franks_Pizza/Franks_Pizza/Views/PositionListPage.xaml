@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Franks_Pizza.PositionListPage"
+             BackgroundImage="back.jpg">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ColorText">Black</Color>
+            <FontAttributes x:Key="textFontAttributes">Bold</FontAttributes>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="10">
+        <ListView ItemsSource="{Binding Positions}"
+                  SelectedItem="{Binding SelectedPosition, Mode=TwoWay}"
+                  ItemSelected="OnPositionSelected"
+                   SeparatorColor="{StaticResource ColorText}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <Label Text="{Binding Name}" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                            <Label Text="{Binding Description}" HorizontalOptions="StartAndExpand" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                            <Label Text="$:" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                            <Label Text="{Binding OnePrice}" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

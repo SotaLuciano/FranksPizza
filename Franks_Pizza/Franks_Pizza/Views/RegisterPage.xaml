@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Franks_Pizza.RegisterPage"
+             BackgroundImage="back.jpg">
+    <StackLayout HorizontalOptions="Center">
+        <TableView Intent="Form"  BindingContext="{Binding New_user}">
+            <TableRoot>
+                <TableSection Title="REGISTER">
+                    <EntryCell Label="LOGIN: " Placeholder="(text)" LabelColor="Black" Text="{Binding Login}"/>
+                    <EntryCell Label="FIRST NAME: " Placeholder="(text)" LabelColor="Black" Text="{Binding FirstName}"/>
+                    <EntryCell Label="LAST NAME: " Placeholder="(text)" LabelColor="Black" Text="{Binding LastName}" />
+                    <EntryCell Label="EMAIL: " Placeholder="(text)" LabelColor="Black" Text="{Binding Email}" Keyboard="Email"/>
+                    <EntryCell Label="ADDRESS: " Placeholder="(text)" LabelColor="Black" Text="{Binding Address}" />
+                    <EntryCell Label="PHONE: " Placeholder="(text)" LabelColor="Black" Text="{Binding Phone}" Keyboard="Numeric"/>
+                    <EntryCell Label="PASSWORD: " Placeholder="(text)" LabelColor="Black" Text="{Binding Password}"/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <StackLayout Orientation="Horizontal" Padding="10" >
+            <Button Text="Male" HorizontalOptions="FillAndExpand" IsVisible="{Binding MalePressed}" Command="{Binding MaleClickedCommand}" BackgroundColor="Black" TextColor="White"/>
+            <Button Text="Female" HorizontalOptions="FillAndExpand" IsVisible="{Binding FemalePressed}" Command="{Binding FemaleClickedCommand}" BackgroundColor="Black" TextColor="White"/>
+        </StackLayout>
+        <StackLayout HorizontalOptions="Center">
+            <Button Text="REGISTER" BackgroundColor="Black" TextColor="White" HorizontalOptions="EndAndExpand" Command="{Binding RegisterClickedCommand}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

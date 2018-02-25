@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Franks_Pizza.AddNewPositionPage"
+             BarTextColor="White">
+    <ContentPage Title="Food" Icon="pizza_icon.png"  BackgroundImage="back.jpg">
+        
+        <Grid Padding="10">
+            <Button Grid.Row="0" Grid.Column="0" Text="Soup" Image="soup_icon.png" BorderRadius="30" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="Black" TextColor="White" Command="{Binding AddSoupCommand}"/>
+
+            <Button Grid.Row="0" Grid.Column="1" Text="Pizza" Image="pizza_icon.png" BorderRadius="30" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="Black" TextColor="White" Command="{Binding AddPizzaCommand}"/>
+
+            <Button Grid.Row="1" Grid.Column="0" Text="Dessert" Image="dessert_icon.png" BorderRadius="30" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="Black" TextColor="White" Command="{Binding AddDessertCommand}"/>
+
+            <Button Grid.Row="1" Grid.Column="1" Text="Other" IsEnabled="False" Image="other_icon.png" BorderRadius="30" VerticalOptions="CenterAndExpand" BackgroundColor="Black" TextColor="White" FontSize="20"/>
+
+            <Button Grid.Row="2" Grid.ColumnSpan="2" Text="Back" BorderRadius="30" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="Black" TextColor="White" Command="{Binding ExitCommand}"/>
+
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="Drinks"  Icon="drinks_icon.png"  BackgroundImage="back.jpg">
+        <Grid Padding="10">
+            <Button Grid.Row="0" Grid.Column="0" Text="Coca" Image="coda_icon.png" BorderRadius="30" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="Black" TextColor="White" Command="{Binding AddCocaCommand}"/>
+
+            <Button Grid.Row="0" Grid.Column="1" Text="Sprite" Image="coda_icon.png" BorderRadius="30" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="Black" TextColor="White" Command="{Binding AddSpriteCommand}"/>
+
+            <Button Grid.Row="1" Grid.Column="0" Text="Pepsi" Image="coda_icon.png" BorderRadius="30" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="Black" TextColor="White" Command="{Binding AddPepsiCommand}"/>
+
+            <Button Grid.Row="1" Grid.Column="1" Text="Other" IsEnabled="False" Image="other_icon.png" BorderRadius="30" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="Black" TextColor="White"/>
+
+            <Button Grid.Row="2" Grid.ColumnSpan="2" Text="Back" BorderRadius="30" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="Black" TextColor="White" Command="{Binding ExitCommand}"/>
+        </Grid>
+    </ContentPage>
+</TabbedPage>

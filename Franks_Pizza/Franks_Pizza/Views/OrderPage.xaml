@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Franks_Pizza.OrderPage"
+             BackgroundImage="back.jpg">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ColorText">Black</Color>
+            <FontAttributes x:Key="textFontAttributes">Bold</FontAttributes>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Spacing="0">
+        <StackLayout Orientation="Horizontal">
+            <Button Image="add_icon.png" HeightRequest="48" WidthRequest="48" Command="{Binding AddPressed}"/>
+            <Label Text="ORDER" TextColor="{StaticResource ColorText}" FontAttributes="{StaticResource textFontAttributes}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+            <Button Image="settings_icon.png" HeightRequest="48" WidthRequest="48" Command="{Binding SettingsCommand}"/>
+        </StackLayout>
+        <ListView ItemsSource="{Binding PositionOrderViewModel}" x:Name="detailListView" TranslationY="10">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell x:Name="viewCell">
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Delete" IsDestructive="True" BindingContext="{Binding Source={x:Reference detailListView}, Path=BindingContext}" Command="{Binding DeletePositionCommand}" CommandParameter="{Binding Source={x:Reference viewCell}, Path=BindingContext}"/>
+                        </ViewCell.ContextActions>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <Label Text="{Binding Name}" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                            <Label Text="{Binding Description}" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                            <Label Text=" | Amount:" HorizontalOptions="Center" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                            <Label Text="{Binding Count}" HorizontalOptions="StartAndExpand" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                            <Label Text="$:" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                            <Label Text="{Binding Price}" FontSize="20" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Label Text="Total Price: $" FontSize="25" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+            <Label Text="{Binding TotalPrice}" FontSize="25" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+        </StackLayout>
+        <Button Text="Lets go!" BackgroundColor="Black" BorderRadius="20" HorizontalOptions="Fill" TextColor="White"/>
+    </StackLayout>
+</ContentPage>

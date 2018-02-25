@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Franks_Pizza"
+             x:Class="Franks_Pizza.MainPage"
+             BackgroundImage="logo.jpg">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="buttonBackgroundColor">Black</Color>
+            <Color x:Key="buttonTextColor">White</Color>
+            <x:Int32 x:Key="borderRadius">20</x:Int32>
+            <FontAttributes x:Key="buttonFontAttributes">Bold</FontAttributes>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout VerticalOptions="End">
+        <Label Text=" " VerticalOptions="CenterAndExpand" />
+        <Button Text="Login" TextColor="{StaticResource buttonTextColor}" BackgroundColor="{StaticResource buttonBackgroundColor}" FontAttributes="{StaticResource buttonFontAttributes}" Command="{Binding LoginButton}"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"/>
+        <Button Text="Register" TextColor="{StaticResource buttonTextColor}" BackgroundColor="{StaticResource buttonBackgroundColor}" FontAttributes="{StaticResource buttonFontAttributes}" Command="{Binding RegisterButton}"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand"/>
+    </StackLayout>
+</ContentPage>

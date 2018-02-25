@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Franks_Pizza.SettingsPage"
+             BackgroundImage="back.jpg">
+    <StackLayout >
+        <StackLayout Orientation="Horizontal" Spacing="30" >
+            <Image  BindingContext="{Binding User}" Source="{Binding AvatarSource}" HeightRequest="100" WidthRequest="100" TranslationX="20"/>
+            <Label  BindingContext="{Binding User}" Text="{Binding Path=Login}" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="30" FontAttributes="Bold" TextColor="Black"/>
+            <StackLayout>
+                <Button Image="gps_icon.png" BackgroundColor="#F7981D" WidthRequest="50" HeightRequest="50" Command="{Binding GetAddressCommand}"/>
+                <Button Image="photo_icon.png" BackgroundColor="#F7981D" WidthRequest="50" HeightRequest="50" Command="{Binding ChangeAvatarCommand}"/>
+            </StackLayout>
+        </StackLayout>
+        <TableView Intent="Form" BindingContext="{Binding User}">
+            <TableRoot>
+                <TableSection>
+                    <EntryCell Label="FIRST NAME: " LabelColor="Black" Text="{Binding FirstName}"/>
+                    <EntryCell Label="LAST NAME: " LabelColor="Black" Text="{Binding LastName}" />
+                    <EntryCell Label="EMAIL: " LabelColor="Black" Text="{Binding Email}" Keyboard="Email"/>
+                    <EntryCell Label="ADDRESS: " LabelColor="Black" Text="{Binding Address}"/>
+                    <EntryCell Label="PHONE: "  LabelColor="Black" Text="{Binding Phone}" Keyboard="Numeric"/>
+                    <EntryCell Label="PASSWORD: " LabelColor="Black" Text="{Binding Password}"/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="EXIT" FontSize="20" BackgroundColor="Black" TextColor="White" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Command="{Binding ExitCommand}"/>
+            <Button Text="Save" FontSize="20" BackgroundColor="Black" TextColor="White" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Command="{Binding SaveCommand}"/>
+            <Button Text="Delete" FontSize="20" BackgroundColor="Black" TextColor="White" FontAttributes="Bold" HorizontalOptions="FillAndExpand" Command="{Binding DeleteCommand}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

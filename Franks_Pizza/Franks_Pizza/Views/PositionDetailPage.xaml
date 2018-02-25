@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Franks_Pizza.PositionDetailPage"
+             BackgroundImage="back.jpg">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="ColorText">Black</Color>
+            <FontAttributes x:Key="textFontAttributes">Bold</FontAttributes>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <StackLayout BindingContext="{Binding my_position}">
+            <AbsoluteLayout BackgroundColor="Tan">
+                <ActivityIndicator IsRunning="{Binding Source={x:Reference img}, Path=IsLoading}" AbsoluteLayout.LayoutBounds="0.5,0.5,50,50" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                <Image x:Name="img" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Source="{Binding Url}" Aspect="AspectFill"/>
+            </AbsoluteLayout>
+            <StackLayout Padding="10">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="{Binding Name}" FontSize="25" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                    <Label Text="{Binding Description}" FontSize="25" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Composition: " FontSize="18" FontAttributes="{StaticResource textFontAttributes}"  TextColor="{StaticResource ColorText}"/>
+                    <Label Text="{Binding Composition}" FontSize="18" TextColor="{StaticResource ColorText}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Price: " FontSize="18" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}" />
+                    <Label Text="{Binding Price}" FontSize="18" TextColor="{StaticResource ColorText}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Count: " FontSize="18" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
+                    <Label Text="{Binding Source={x:Reference stepper}, Path=Value}" FontSize="18" TextColor="{StaticResource ColorText}"/>
+                </StackLayout>
+                <Stepper Maximum="10" Minimum="1" x:Name="stepper" Value="{Binding Count}" />
+            </StackLayout>
+        </StackLayout>
+        <Button Text="Add to order!" BackgroundColor="Black" TextColor="White" VerticalOptions="EndAndExpand" FontSize="25" FontAttributes="{StaticResource textFontAttributes}" Command="{Binding AddCommand}"/>
+    </StackLayout>
+</ContentPage>
