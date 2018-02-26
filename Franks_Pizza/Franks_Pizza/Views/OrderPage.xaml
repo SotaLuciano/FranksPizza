@@ -38,6 +38,6 @@
             <Label Text="Total Price: $" FontSize="25" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
             <Label Text="{Binding TotalPrice}" FontSize="25" FontAttributes="{StaticResource textFontAttributes}" TextColor="{StaticResource ColorText}"/>
         </StackLayout>
-        <Button Text="Lets go!" BackgroundColor="Black" BorderRadius="20" HorizontalOptions="Fill" TextColor="White"/>
+        <Button Text="Make an order!" BackgroundColor="Black" BorderRadius="20" HorizontalOptions="Fill" TextColor="White" Command="{Binding MakeOrderCommand}"/>
     </StackLayout>
 </ContentPage>

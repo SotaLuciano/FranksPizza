@@ -26,6 +26,7 @@ namespace Franks_Pizza.ViewModels
         public ICommand AddPressed { get; private set; }
         public ICommand SettingsCommand { get; private set; }
         public ICommand DeletePositionCommand { get; private set; }
+        public ICommand MakeOrderCommand{ get; private set; }
 
 
         public event EventHandler Exit;
@@ -51,6 +52,7 @@ namespace Franks_Pizza.ViewModels
             AddPressed = new Command(async () => await AddPosition());
             SettingsCommand = new Command(async () => await Settings());
             DeletePositionCommand = new Command<PositionViewModel>(async c => await Delete(c));
+            MakeOrderCommand = new Command(async () => await MakeOrder());
         }
 
         private async Task AddPosition()
@@ -92,5 +94,21 @@ namespace Franks_Pizza.ViewModels
             }
         }
 
+        private async Task MakeOrder()
+        {
+            string tmp = "";
+            foreach(var pos in PositionOrderViewModel)
+            {
+                tmp += pos.Name + " " + pos.Description + " -" + pos.Price + "$\n";
+            }
+            tmp += "----------------------------------------\n";
+            tmp += "Total price: " + TotalPrice.ToString() + "$";
+
+            await _pageService.DisplayAlert("Your order", tmp, "OK");
+
+            PositionOrderViewModel.Clear();
+            TotalPrice = -TotalPrice;
+
+        }
     }
 }
