@@ -9,18 +9,13 @@ namespace Franks_Pizza.ViewModels
 {
     public class MainPageViewModel
     {
-        //private UserViewModel _user;
         // UserBase connection
         private IUserBase _userBase;
         // Navigation
         private IPageService _pageService;
 
         //Buttons on MainPage
-        public ICommand LoginButton
-        {
-            get;
-            private set;
-        }
+        public ICommand LoginButton{ get; private set;}
         public ICommand RegisterButton { get; private set; }
 
         public MainPageViewModel(IUserBase userBase, IPageService pageService)
@@ -34,21 +29,15 @@ namespace Franks_Pizza.ViewModels
 
         private async Task Login()
         {
-
-            //await _pageService.DisplayAlert("Save", "login", "OK");
-
             var viewModel = new LoginPageViewModel(_userBase, _pageService);
-
+            // Open Login Page
             await _pageService.PushAsync(new LoginPage(viewModel));
         }
 
         private async Task Register()
         {
-
-            //await _pageService.DisplayAlert("Save", "login", "OK");
-
             var viewModel = new RegisterPageViewModel(_userBase, _pageService);
-
+            // Open Register Page
             await _pageService.PushAsync(new RegisterPage(viewModel));
         }
     }

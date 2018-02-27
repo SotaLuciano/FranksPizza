@@ -15,12 +15,12 @@ namespace Franks_Pizza.ViewModels
         private IUserBase _userBase;
         // Navigation
         private IPageService _pageService;
-
+        // Position list
         public ObservableCollection<PositionViewModel> Positions { get; private set; }
             = new ObservableCollection<PositionViewModel>();
-
         private PositionViewModel _selectedPosition;
 
+        // For 'deselect'
         public PositionViewModel SelectedPosition
         {
             get { return _selectedPosition; }
@@ -47,10 +47,11 @@ namespace Franks_Pizza.ViewModels
             if (position == null)
                 return;
 
+            // Deselect
             SelectedPosition = null ;
 
             var viewModel = new PositionDetailPageViewModel(_userBase, _pageService, position);
-
+            // If 'add to order' pressed
             viewModel.PositionAdded += (source, newPosition) =>
             {
                 PosAdded?.Invoke(this, newPosition);

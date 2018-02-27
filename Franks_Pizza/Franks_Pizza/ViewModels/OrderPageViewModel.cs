@@ -15,20 +15,22 @@ namespace Franks_Pizza.ViewModels
         private IUserBase _userBase;
         // Navigation
         private IPageService _pageService;
-
+        // Value for total price
         private int _totalPrice = 0;
 
         private UserViewModel _user;
 
+        // Order list
         public ObservableCollection<PositionViewModel> PositionOrderViewModel { get; private set; } =
             new ObservableCollection<PositionViewModel>();
 
+        // Commands
         public ICommand AddPressed { get; private set; }
         public ICommand SettingsCommand { get; private set; }
         public ICommand DeletePositionCommand { get; private set; }
         public ICommand MakeOrderCommand{ get; private set; }
 
-
+        // Exit pressed
         public event EventHandler Exit;
 
         public int TotalPrice
@@ -58,7 +60,7 @@ namespace Franks_Pizza.ViewModels
         private async Task AddPosition()
         {
             var viewModel = new AddNewPositionPageViewModel(_userBase, _pageService);
-
+            // If new position added change list and change total price
             viewModel.PosAdded += (source, newPosition) =>
             {
                 PositionOrderViewModel.Add(new PositionViewModel(newPosition));
@@ -71,11 +73,12 @@ namespace Franks_Pizza.ViewModels
         private async Task Settings()
         {
             var viewModel = new SettingsPageViewModel(_userBase, _pageService, _user);
+            // If user upated
             viewModel.UserUpdated += (source, user) =>
             {
                 _user = new UserViewModel(user);
             };
-
+            // If exit pressed
             viewModel.Exit += (source, eargs) =>
             {
                 _pageService.PopAsync();
@@ -87,6 +90,7 @@ namespace Franks_Pizza.ViewModels
 
         private async Task Delete(PositionViewModel _position)
         {
+            // Delete position
             if (await _pageService.DisplayAlert("Warning", $"Are you sure you want to delete {_position.Name}?", "Yes", "No"))
             {
                 TotalPrice = -_position.Price;
@@ -96,6 +100,7 @@ namespace Franks_Pizza.ViewModels
 
         private async Task MakeOrder()
         {
+            // The bill:
             string tmp = "";
             foreach(var pos in PositionOrderViewModel)
             {
@@ -105,10 +110,9 @@ namespace Franks_Pizza.ViewModels
             tmp += "Total price: " + TotalPrice.ToString() + "$";
 
             await _pageService.DisplayAlert("Your order", tmp, "OK");
-
+            // Clear all fields
             PositionOrderViewModel.Clear();
             TotalPrice = -TotalPrice;
-
         }
     }
 }

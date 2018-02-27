@@ -6,6 +6,7 @@ using Xamarin.Forms;
 
 namespace Franks_Pizza.Models
 {
+    // User Table
     public class User
     {
         [PrimaryKey, AutoIncrement]
@@ -35,7 +36,7 @@ namespace Franks_Pizza.Models
         [MaxLength(10)]
         public string Sex { get; set; }
 
-        [MaxLength(10)]
+        [MaxLength(100)]
         public string  AvatarSource { get; set; }
     }
 }

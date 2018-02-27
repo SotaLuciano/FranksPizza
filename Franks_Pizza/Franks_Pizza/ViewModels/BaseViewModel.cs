@@ -31,10 +31,5 @@ namespace Franks_Pizza.ViewModels
 
             OnPropertyChanged(propertyName);
         }
-
-        protected void SetAvatar(ref string backingField, string value, IPageService pageService, [CallerMemberName] string propertyName = null)
-        {
-
-        }
     }
 }

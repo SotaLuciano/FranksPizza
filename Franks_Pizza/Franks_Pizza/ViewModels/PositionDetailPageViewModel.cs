@@ -42,6 +42,7 @@ namespace Franks_Pizza.ViewModels
         private async Task AddPosition()
         {
             await _pageService.DisplayAlert("ORDER", my_position.Name + " added to your order!", "OK");
+            // Invoke all events
             PositionAdded?.Invoke(this, my_position);
             await _pageService.PopAsync();
         }

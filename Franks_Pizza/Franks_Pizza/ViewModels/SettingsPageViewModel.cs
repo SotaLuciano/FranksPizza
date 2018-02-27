@@ -18,17 +18,19 @@ namespace Franks_Pizza.ViewModels
         private IUserBase _userBase;
         // Navigation
         private IPageService _pageService;
-
+        // Geolocation
         private Geocoder geoCoder;
 
         public UserViewModel User { get; private set; }
 
+        // Commands
         public ICommand SaveCommand { get; private set; }
         public ICommand ExitCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
         public ICommand ChangeAvatarCommand { get; private set; }
         public ICommand GetAddressCommand { get; private set; }
 
+        // Events Update | Exit
         public event EventHandler<User> UserUpdated;
         public event EventHandler Exit;
 
@@ -50,12 +52,14 @@ namespace Franks_Pizza.ViewModels
 
         private async Task Save()
         {
+            // Check empty fields
             if (String.IsNullOrWhiteSpace(User.FirstName) || String.IsNullOrWhiteSpace(User.LastName) || String.IsNullOrWhiteSpace(User.Address) || String.IsNullOrWhiteSpace(User.Email) || String.IsNullOrWhiteSpace(User.Password) || String.IsNullOrWhiteSpace(User.Phone))
             {
                 await _pageService.DisplayAlert("Error", "Please input all information", "OK");
                 return;
             }
 
+            // Update User
             var _user = new User
             {
                 Id = User.Id,
@@ -70,12 +74,12 @@ namespace Franks_Pizza.ViewModels
                 Login = User.Login
             };
 
+            // Update info
             await _userBase.UpdateUser(_user);
             UserUpdated?.Invoke(this, _user);
 
             await _pageService.DisplayAlert("Update", "User information update successful!", "OK");
             await _pageService.PopAsync();
-
         }
 
         private async Task ExitPressed()
@@ -107,7 +111,7 @@ namespace Franks_Pizza.ViewModels
                     Login = User.Login
                 };
 
-
+                // Deleting user
                 await _userBase.DeleteUser(_user);
 
                 await _pageService.PopAsync();
@@ -117,6 +121,7 @@ namespace Franks_Pizza.ViewModels
 
         private async Task ChangeAvatar()
         {
+            // Choose new avatar
             var choose = await _pageService.DisplayActionSheet("Change Avatar", "Cancel", null, "Camera", "Gallery");
 
             if (choose == "Camera")
@@ -129,6 +134,7 @@ namespace Franks_Pizza.ViewModels
                     return;
                 }
 
+                // Take a photo
                 var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
                     SaveToAlbum = true,
@@ -137,8 +143,8 @@ namespace Franks_Pizza.ViewModels
 
                 if (file == null)
                     return;
-                var tmp = file.ToString();
 
+                // Change avatar
                 User.AvatarSource = file.Path;
 
                 var _user = new User
@@ -155,6 +161,7 @@ namespace Franks_Pizza.ViewModels
                     Login = User.Login
                 };
 
+                // Update info
                 await _userBase.UpdateUser(_user);
                 UserUpdated?.Invoke(this, _user);
             }
@@ -165,10 +172,12 @@ namespace Franks_Pizza.ViewModels
                     return;
                 }
 
+                // Choose photo from gallery
                 var file = await CrossMedia.Current.PickPhotoAsync();
+
                 if (file == null)
                     return;
-
+                // Change photo
                 User.AvatarSource = file.Path;
 
                 var _user = new User
@@ -184,13 +193,11 @@ namespace Franks_Pizza.ViewModels
                     AvatarSource = User.AvatarSource,
                     Login = User.Login
                 };
-
+                // Update info
                 await _userBase.UpdateUser(_user);
                 UserUpdated?.Invoke(this, _user);
             }
-
         }
-
 
         private async Task GetAddress()
         {
@@ -198,9 +205,9 @@ namespace Franks_Pizza.ViewModels
             {
                 var locator = CrossGeolocator.Current;
                 locator.DesiredAccuracy = 50;
-
+                // Get current location
                 var position = await locator.GetPositionAsync(timeout: TimeSpan.FromMilliseconds(1000));
-
+                // Get address
                 var address = new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude);
 
                 string tmp = "";

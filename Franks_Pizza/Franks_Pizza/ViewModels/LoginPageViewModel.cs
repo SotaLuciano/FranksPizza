@@ -15,6 +15,7 @@ namespace Franks_Pizza.ViewModels
         // Navigation
         private IPageService _pageService;
 
+        // Input fields
         private string _login;
         private string _pass;
 
@@ -29,36 +30,42 @@ namespace Franks_Pizza.ViewModels
             get { return _pass; }
             set { SetValue(ref _pass, value); }
         }
-
+        
+        // Button Command
         public ICommand SignIn { get; private set; }
 
         public LoginPageViewModel(IUserBase userBase, IPageService pageService)
         {
             _userBase = userBase;
             _pageService = pageService;
+
             SignIn = new Command(async ()=> await Save());
         }
 
         async Task Save()
         {
+            // Check fields
             if (String.IsNullOrWhiteSpace(Login) || String.IsNullOrWhiteSpace(Pass))
             {
                 await _pageService.DisplayAlert("Error", "Wrong login or password!", "OK");
                 return;
             }
 
+            // Check DB
             var check = await _userBase.CheckLogin(Login, Pass);
 
+            // If login successfully:
             if (check != null)
             {
                 var viewModel = new OrderPageViewModel(_userBase, _pageService, check);
 
+                // If exit button from settings page pressed, clear fields
                 viewModel.Exit += (source, eargs) =>
                 {
                     Login = "";
                     Pass = "";
                 };
-
+                // Open Order Page
                 await _pageService.PushAsync(new OrderPage(viewModel));
             }
             else

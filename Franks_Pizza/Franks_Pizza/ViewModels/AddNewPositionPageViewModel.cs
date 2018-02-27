@@ -17,9 +17,9 @@ namespace Franks_Pizza.ViewModels
 
         public Position my_position { get; private set; }
 
-
         public event EventHandler<Position> PosAdded;
 
+        // Commands
         public ICommand AddPizzaCommand { get; private set; }
         public ICommand AddSoupCommand { get; private set; }
         public ICommand AddDessertCommand { get; private set; }
@@ -27,8 +27,6 @@ namespace Franks_Pizza.ViewModels
         public ICommand AddCocaCommand { get; private set; }
         public ICommand AddSpriteCommand { get; private set; }
         public ICommand AddPepsiCommand { get; private set; }
-
-
 
         public AddNewPositionPageViewModel(IUserBase userBase, IPageService pageService)
         {
@@ -42,11 +40,11 @@ namespace Franks_Pizza.ViewModels
             AddCocaCommand = new Command(async () => await Coca());
             AddSpriteCommand = new Command(async () => await Sprite());
             AddPepsiCommand = new Command(async () => await Pepsi());
-
         }
 
         private async Task Pizza()
         {
+            // Creating list
             var _positions = new List<Position>
             {
                 new Position{Name="Pizza", Description="Mexico", OnePrice=20, Count = 1 , Url="http://images.pizza33.ua/products_for_catalog/fKBxGDG2d4IxUR69a576Ct1QGwRa3xHP.jpg",
@@ -72,7 +70,7 @@ namespace Franks_Pizza.ViewModels
             };
 
             var viewModel = new PositionListPageViewModel(_userBase, _pageService, _positions);
-
+            // If 'add to order' pressed -> invoke posAdded
             viewModel.PosAdded += (source, newPosition) =>
             {
                 PosAdded?.Invoke(this, newPosition);
@@ -83,6 +81,7 @@ namespace Franks_Pizza.ViewModels
 
         private async Task Soup()
         {
+            // Creating list
             var _positions = new List<Position>
             {
                 new Position{Name="Soup", Description="Mexico", OnePrice=22, Count = 1 , Url="http://cdn3.tmbi.com/toh/GoogleImages/Summer-Vegetable-Soup_exps18529_HWS133216C07_11_2bC_RMS.jpg",
@@ -100,7 +99,7 @@ namespace Franks_Pizza.ViewModels
             };
 
             var viewModel = new PositionListPageViewModel(_userBase, _pageService, _positions);
-
+            // If 'add to order' pressed -> invoke posAdded
             viewModel.PosAdded += (source, newPosition) =>
             {
                 PosAdded?.Invoke(this, newPosition);
@@ -111,6 +110,7 @@ namespace Franks_Pizza.ViewModels
 
         private async Task Dessert()
         {
+            // Creating list
             var _positions = new List<Position>
             {
                 new Position{Name="Dessert", Description="Charlotte", OnePrice=123, Count = 1 , Url="http://www.kraftrecipes.com/-/media/assets/2016-summer/berry-bliss-cake-106367-642x428.jpg",
@@ -127,7 +127,7 @@ namespace Franks_Pizza.ViewModels
             };
 
             var viewModel = new PositionListPageViewModel(_userBase, _pageService, _positions);
-
+            // If 'add to order' pressed -> invoke posAdded
             viewModel.PosAdded += (source, newPosition) =>
             {
                 PosAdded?.Invoke(this, newPosition);
@@ -143,6 +143,7 @@ namespace Franks_Pizza.ViewModels
 
         private async Task Coca()
         {
+            // Choose cola size
             var choose = await _pageService.DisplayActionSheet("Choose your size!", "Cancel", null, "Coca 0.5 l. | 20$ ", "Coca 1 l. | 39$ ");
 
             if(choose == "Coca 0.5 l. | 20$ ")
@@ -155,6 +156,7 @@ namespace Franks_Pizza.ViewModels
                     Count = 1
                 };
 
+                // Add to order
                 await _pageService.DisplayAlert("ORDER", my_position.Name + " added to your order!", "OK");
                 PosAdded?.Invoke(this, my_position);
             }
@@ -167,14 +169,15 @@ namespace Franks_Pizza.ViewModels
                     OnePrice = 39,
                     Count = 1
                 };
+                // Add to order
                 await _pageService.DisplayAlert("ORDER", my_position.Name + " added to your order!", "OK");
-
                 PosAdded?.Invoke(this, my_position);
             }
         }
 
         private async Task Sprite()
         {
+            // Choose sprite size
             var choose = await _pageService.DisplayActionSheet("Choose your size!", "Cancel", null, "Sprite 0.5 l. | 18$ ", "Sprite 1 l. | 37$ ");
 
             if (choose == "Sprite 0.5 l. | 18$ ")
@@ -186,7 +189,7 @@ namespace Franks_Pizza.ViewModels
                     OnePrice = 18,
                     Count = 1
                 };
-
+                // Add to order
                 await _pageService.DisplayAlert("ORDER", my_position.Name + " added to your order!", "OK");
                 PosAdded?.Invoke(this, my_position);
             }
@@ -199,14 +202,15 @@ namespace Franks_Pizza.ViewModels
                     OnePrice = 37,
                     Count = 1
                 };
+                // Add to order
                 await _pageService.DisplayAlert("ORDER", my_position.Name + " added to your order!", "OK");
-
                 PosAdded?.Invoke(this, my_position);
             }
         }
 
         private async Task Pepsi()
         {
+            // Choose pepsi size
             var choose = await _pageService.DisplayActionSheet("Choose your size!", "Cancel", null, "Pepsi 0.5 l. | 22$ ", "Pepsi 1 l. | 45$ ");
 
             if (choose == "Pepsi 0.5 l. | 22$ ")
@@ -218,7 +222,7 @@ namespace Franks_Pizza.ViewModels
                     OnePrice = 22,
                     Count = 1
                 };
-
+                // Add to order
                 await _pageService.DisplayAlert("ORDER", my_position.Name + " added to your order!", "OK");
                 PosAdded?.Invoke(this, my_position);
             }
@@ -232,7 +236,7 @@ namespace Franks_Pizza.ViewModels
                     Count = 1
                 };
                 await _pageService.DisplayAlert("ORDER", my_position.Name + " added to your order!", "OK");
-
+                // Add to order
                 PosAdded?.Invoke(this, my_position);
             }
         }

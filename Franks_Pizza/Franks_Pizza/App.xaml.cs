@@ -14,7 +14,6 @@ namespace Franks_Pizza
 			InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage());
-            //MainPage = new AddNewPositionPage();
         }
 
 		protected override void OnStart ()
